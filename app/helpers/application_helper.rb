@@ -29,9 +29,9 @@ module ApplicationHelper
   end
   def banners
     banners = []
-    banners << {src:'assets/banner/banner1.jpg', caption: 'Space, the final frontier.'}
-    banners << {src:'assets/banner/banner2.jpg', caption: 'Lets Rocket!'}
-    banners << {src:'assets/banner/banner3.jpg', caption: 'Encapsulating'}
+    banners << {src: asset_path('banner/banner1.jpg'), caption: 'Space, the final frontier.'}
+    banners << {src: asset_path('banner/banner2.jpg'), caption: 'Lets Rocket!'}
+    banners << {src: asset_path('banner/banner3.jpg'), caption: 'Encapsulating'}
     banners
   end
 end
