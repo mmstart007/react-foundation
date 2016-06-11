@@ -1,0 +1,40 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title ReactAndFoundationTest
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .title-bar{"data-hide-for" => "medium", "data-responsive-toggle" => "foundblog-menu"}
+      %button.menu-icon{"data-toggle" => "", :type => "button"}
+      .title-bar-title Menu
+    #foundblog-menu.top-bar
+      .top-bar-left
+        %ul.menu
+          %li.menu-text
+            Found
+            %i Blog
+          %li
+            %a{:href => "/"} HOME
+          %li= link_to "Archives", '#'
+          %li= link_to "Readme", '#'
+      .top-bar-right
+        %ul.dropdown.menu{"data-dropdown-menu" => ""}
+          - if user_signed_in?
+            %li
+              %a{:href => "#"}= current_user.email
+              %ul.menu
+                %li= link_to "My Profile", edit_user_registration_path
+                %li= link_to "Sign out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure?" }
+          - else
+            %li= link_to "Sign in", new_user_session_path
+            %li= link_to "Sign up", new_user_registration_path
+    #banner_warpper
+      = react_component 'Banner', {data: banners}
+    = content_for?(:devise) ? yield(:devise) : yield(:general)
+    .row.column
+      #footer
+        %p Copyright® 2016, Ming React and Foundation Test Project.

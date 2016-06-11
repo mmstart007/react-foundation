@@ -1,0 +1,9 @@
+/ Section for Devise layouts
+= content_for :devise do
+  .row
+    .medium-6.columns.medium-centered
+      = render partial: "shared/flash_messages", flash: flash
+      %div{:style => "margin:2em 0 5em;"}
+        = yield
+/ Section for Applictiona Layout
+= render template: 'layouts/application'

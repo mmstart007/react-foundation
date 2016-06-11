@@ -1,0 +1,17 @@
+/ Section for General layouts
+= content_for :general do
+  .row
+    .large-9.medium-9.columns
+      .row
+        .medium-12.columns
+          = render partial: "shared/flash_messages", flash: flash
+          = yield
+    .medium-3.columns{:style => "margin-top: 1em"}
+      .row
+        .medium-12.columns
+          -# %center
+          -#   - if user_signed_in?
+          -#     = link_to 'New Post', new_post_path, class: 'button small'
+          -#   - else
+          -#     = link_to 'Sign in', new_user_session_path, class: 'button small'
+= render template: 'layouts/application'

@@ -14,3 +14,13 @@
  *= require_self
  */
 @import 'foundation_and_overrides';
+@import 'foundation-icons';
+
+// Banner style
+.orbit-container{
+  .orbit-previous{
+    .show-for-sr{
+    }
+  }
+
+}
