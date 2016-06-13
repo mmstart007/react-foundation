@@ -1,9 +1,13 @@
 @Dialog = React.createClass
   getInitialState: ->
-    modal: @props.data
+    modal: ''
   componentDidMount: ->
     $("##{@props.id}").foundation()
     $("##{@props.id}").foundation('open')
+
+  changePropsTest:  ->
+    console.log "udsafsdfasdfu"
+
   render: ->
     React.DOM.div
       className: 'small reveal'
@@ -11,7 +15,7 @@
       'data-reveal': ''
       React.DOM.p
         @props.title
-      React.createElement @props.content
+      React.createElement @props.content, handle_navbar: @changePropsTest, data: 'create modal'
       React.DOM.a
         className: "close-button"
         "data-close": ""

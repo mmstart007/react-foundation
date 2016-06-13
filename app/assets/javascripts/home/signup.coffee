@@ -3,7 +3,8 @@
     email:''
     password:''
     password_confirmation:''
-
+  componentDidMount: ->
+    console.log 'rendered sign_up component'
   getMetaContent: (name) ->
     metas = document.getElementsByTagName('meta')
     i = 0
@@ -27,7 +28,10 @@
           email: @state.email
           password: @state.password
           password_confirmation: @state.password_confirmation
-        authenticity_token: @getMetaContent('csrf-token')).done ((data) ->
+        authenticity_token: @getMetaContent('csrf-token')).fail ((data) ->
+          msg = JSON.parse(data.responseText)
+          alert msg.error
+    ).done ((data) ->
       location.reload()
       return
     ).bind(this)

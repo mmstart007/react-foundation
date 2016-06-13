@@ -2,7 +2,10 @@
   getInitialState: ->
     email:''
     password:''
-
+  componentDidMount: ->
+    @props.handle_navbar
+    console.log @props.data
+    console.log 'rendered sign_in component'
   render: ->
     React.DOM.form
       className: 'test-form'
@@ -43,8 +46,11 @@
         user:
           email: @state.email
           password: @state.password
-        authenticity_token: @getMetaContent('csrf-token')).done ((data) ->
-      location.reload()
-      return
+        authenticity_token: @getMetaContent('csrf-token')).done((data) ->
+        console.log @props
+      ).fail ((data) ->
+        msg = JSON.parse(data.responseText)
+        alert msg.error
+        return
     ).bind(this)
     return

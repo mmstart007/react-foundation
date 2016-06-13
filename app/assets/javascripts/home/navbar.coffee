@@ -2,17 +2,14 @@
   getInitialState: ->
     user: @props.data
   componentDidMount: ->
-    # $.ajax(
-    #   method: 'GET'
-    #   url: '/auth/is_signed_in.json').done ((data) ->
-    #   @setState user: data
-    #   return
-    # ).bind(this)
+    console.log "rendered Navbar"
+  _handleChangeNavbar: (user) ->
+    console.log user
   openSignin: ->
-    ReactDOM.render React.createElement(Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_in-modal-title', title: 'Sign in', className: 'small', content: Signin), document.getElementById('modal_wrapper')
+    ReactDOM.render React.createElement(Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_in-modal-title', title: 'Sign in', className: 'small', content: Signin, handleNavbar: @_handleChangeNavbar), document.getElementById('modal_wrapper')
   openSignup: ->
     # React.createElement Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_up-modal-title', className: 'tiny'
-    ReactDOM.render React.createElement(Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_in-modal-title', title: 'Sign up', className: 'small', content: Signup), document.getElementById('modal_wrapper')
+    ReactDOM.render React.createElement(Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_in-modal-title', title: 'Sign up', className: 'small', content: Signup, handleNavbar: @_handleChangeNavbar), document.getElementById('modal_wrapper')
 
   render: ->
     React.DOM.div
