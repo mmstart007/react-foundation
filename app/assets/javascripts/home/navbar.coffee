@@ -2,7 +2,6 @@
   getInitialState: ->
     user: @props.data
   componentDidMount: ->
-    console.log @state.user.signed_in == true
     # $.ajax(
     #   method: 'GET'
     #   url: '/auth/is_signed_in.json').done ((data) ->
@@ -48,38 +47,40 @@
             React.DOM.a
               href: "#"
               "Archives"
-          React.DOM.li
-            className: null
-            React.DOM.a
-              href: "#"
-              "Readme"
       React.DOM.div
         className: 'top-bar-right'
         React.DOM.ul
           className: 'dropdown menu'
           'data-dropdown-menu': ''
-          if @state.user.signedIn == true
+          if @state.user.signed_in == true
             React.DOM.li null,
               React.DOM.a
                 href: "#"
-                @state.user.email
-                React.DOM.ul
-                  className: 'menu'
-                  React.DOM.li null,
-                    React.DOM.a
-                      href: ''
-                      "My Profile"
-                  React.DOM.li null,
-                    React.DOM.a
-                      href: '/users/sign_out'
-                      "My Profile"
+                @state.user.user.email
+              React.DOM.ul
+                className: 'menu'
+                React.DOM.li null,
+                  React.DOM.a
+                    href: ''
+                    "My Profile"
+                React.DOM.li null,
+                  React.DOM.a
+                    'data-confirm':"Are you sure?"
+                    'data-method': 'delete'
+                    href: '/users/sign_out'
+                    "Signout"
           else
-            React.DOM.li null,
+            React.DOM.li
+              className: 'test1'
+              role: 'menuitem'
               React.DOM.a
                 href: '#'
                 onClick: @openSignin
                 "Sign in"
-            React.DOM.li null,
+          if @state.user.signed_in != true
+            React.DOM.li
+              className: 'test2'
+              role: 'menuitem'
               React.DOM.a
                 href: '#'
                 onClick: @openSignup

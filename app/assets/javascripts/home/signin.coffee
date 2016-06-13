@@ -1,4 +1,4 @@
-@Signup = React.createClass
+@Signin = React.createClass
   getInitialState: ->
     email:''
     password:''
@@ -20,25 +20,30 @@
         onChange: @_handleInputChange
       React.DOM.input
         className: 'button'
-        defaultValue: 'Sign up'
+        defaultValue: 'Signin'
         type: 'button'
         onClick: @_handleRegistrationClick
-
-  _handleInputChange: (ev) ->
+  getMetaContent: (name) ->
+    metas = document.getElementsByTagName('meta')
+    i = 0
+    while i < metas.length
+      if metas[i].getAttribute('name') == name
+        return metas[i].getAttribute('content')
+      i++
+    ''
+  _handleInputChange: (e) ->
     name = e.target.name
     @setState "#{name}": e.target.value
 
   _handleRegistrationClick: (e) ->
     $.ajax(
       method: 'POST'
-      url: '/users.json'
+      url: '/users/sign_in.json'
       data:
         user:
           email: @state.email
           password: @state.password
-          password_confirmation: @state.password_confirmation
-          provider: 'email'
-        authenticity_token: Functions.getMetaContent('csrf-token')).done ((data) ->
+        authenticity_token: @getMetaContent('csrf-token')).done ((data) ->
       location.reload()
       return
     ).bind(this)
