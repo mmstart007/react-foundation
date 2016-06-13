@@ -18,8 +18,7 @@
     @setState "#{name}": e.target.value
 
   _handleRegistrationClick: (e) ->
-    console.log 'tester'
-    console.log @state
+    props_data = @props
     $.ajax(
       method: 'POST'
       url: '/users.json'

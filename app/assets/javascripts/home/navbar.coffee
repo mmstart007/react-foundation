@@ -4,7 +4,7 @@
   componentDidMount: ->
     console.log "rendered Navbar"
   _handleChangeNavbar: (user) ->
-    console.log user
+    @setState({user: {signed_in: true, user: user}})
   openSignin: ->
     ReactDOM.render React.createElement(Dialog, id: 'sign_up-modal', show: true, 'aria-labelledby': 'sign_in-modal-title', title: 'Sign in', className: 'small', content: Signin, handleNavbar: @_handleChangeNavbar), document.getElementById('modal_wrapper')
   openSignup: ->

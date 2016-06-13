@@ -25,7 +25,7 @@
         className: 'button'
         defaultValue: 'Signin'
         type: 'button'
-        onClick: @_handleRegistrationClick
+        onClick: @_handleSigninClick
   getMetaContent: (name) ->
     metas = document.getElementsByTagName('meta')
     i = 0
@@ -38,7 +38,8 @@
     name = e.target.name
     @setState "#{name}": e.target.value
 
-  _handleRegistrationClick: (e) ->
+  _handleSigninClick: (e) ->
+    props_data = @props
     $.ajax(
       method: 'POST'
       url: '/users/sign_in.json'
@@ -47,7 +48,9 @@
           email: @state.email
           password: @state.password
         authenticity_token: @getMetaContent('csrf-token')).done((data) ->
-        console.log @props
+        props_data.handle_navbar data
+        props_data.handle_close_dialog
+        return
       ).fail ((data) ->
         msg = JSON.parse(data.responseText)
         alert msg.error

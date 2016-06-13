@@ -4,10 +4,8 @@
   componentDidMount: ->
     $("##{@props.id}").foundation()
     $("##{@props.id}").foundation('open')
-
-  changePropsTest:  ->
-    console.log "udsafsdfasdfu"
-
+  handleCloseDialog: ->
+    $("##{@props.id}").foundation('close')
   render: ->
     React.DOM.div
       className: 'small reveal'
@@ -15,7 +13,7 @@
       'data-reveal': ''
       React.DOM.p
         @props.title
-      React.createElement @props.content, handle_navbar: @changePropsTest, data: 'create modal'
+      React.createElement @props.content, handle_navbar: @props.handleNavbar, handle_close_dialog: @handleCloseDialog, data: 'create modal'
       React.DOM.a
         className: "close-button"
         "data-close": ""
